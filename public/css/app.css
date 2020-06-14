@@ -1,0 +1,20 @@
+li.active a{
+    color: red;
+}
+.home header{
+    background-color: red;
+}
+.about header{
+    background-color: blue;
+}
+.newclient header{
+    background-color: greenyellow;
+}
+header{
+    background-color: blue;
+    padding: 10px;
+}
+ ul {
+     background-color: #5eb5e0;
+     display: flex;
+ }
