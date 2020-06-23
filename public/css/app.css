@@ -1,6 +1,9 @@
 li.active a{
     color: red;
 }
+li{
+    margin-left: 40px;
+}
 .home header{
     background-color: red;
 }
@@ -17,4 +20,13 @@ header{
  ul {
      background-color: #5eb5e0;
      display: flex;
+ }
+ .offerBlock{
+     display: flex;
+
+ }
+ .offerBlock .img{
+     width: 100px;
+     height: 100px;
+     background-repeat: no-repeat;
  }

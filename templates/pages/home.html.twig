@@ -3,5 +3,11 @@
     Home | {{ parent() }}
 {% endblock %}
 {% block body %}
-    <h1>Home</h1>
+    {% for client in clients %}
+        <div class="offerBlock">
+            <div>{{ client.designation }}</div>
+            <div>{{ client.dateCreation|date('m-d-Y') }}</div>
+            <SPAN style="background-image: url('/uploads/{{ client.imageOfProduct }}')" class="img"></SPAN>
+        </div>
+    {% endfor %}
 {% endblock %}

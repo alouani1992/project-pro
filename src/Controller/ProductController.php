@@ -1,24 +1,27 @@
 <?php
 
 namespace App\Controller;
-use App\clientType;
-use App\Entity\Client;
+use App\ProductType;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ClientController extends AbstractController
+class ProductController extends AbstractController
 {
     /**
      * @Route("/client", name="client")
      */
     public function index(EntityManagerInterface $entityManager)
     {
-        $client = new Client();
-        $client->setNom('Alouani');
-        $client->setDateNais(new \DateTime());
+        $client = new Product();
+        $client->setDesignation('Alouani');
+        $client->setDateCreation(new \DateTime());
+        $client->setDescription('Description 1');
+        $client->setLabel('Label');
         $entityManager->persist($client);
         $entityManager->flush();
         return $this->render('client/index.html.twig', [
@@ -30,13 +33,20 @@ class ClientController extends AbstractController
      */
     public function newclient(EntityManagerInterface $entityManager, \Symfony\Component\HttpFoundation\Request $request)
     {
-        $client = new Client();
-        $client->setNom('Alouani');
-        $client->setDateNais(new \DateTime());
-        $form = $this->createForm(clientType::class,$client);
+        $client = new Product();
+        $client->setDesignation('Alouani');
+        $client->setDateCreation(new \DateTime());
+        $client->setDescription('Description 1');
+        $client->setLabel('Label');
+        $form = $this->createForm(ProductType::class,$client);
         //$form->createView();
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $file = $client->getImageOfProduct();
+            //dd($file->getClientOriginalName());
+            $fileName = md5(uniqid().'.'.$file->guessExtension());
+            $file->move($this->getParameter('upload_directory'),$file->getClientOriginalName());
+            $client->setImageOfProduct($file->getClientOriginalName());
             $entityManager->persist($client);
             $entityManager->flush();
         }
@@ -50,8 +60,11 @@ class ClientController extends AbstractController
      * @Route("/home", name="home")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function home(){
-        return $this ->render('pages/home.html.twig');
+    public function home(ProductRepository $repository){
+        $clients = $repository->findAll();
+        return $this ->render('pages/home.html.twig',array(
+            'clients'=>$clients
+        ));
     }
 
     /**
