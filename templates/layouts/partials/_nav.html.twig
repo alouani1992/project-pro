@@ -1,8 +1,9 @@
-<nav>
-    <ul>
-        <li class="{{ app.request.get('_route') starts with 'ab'?'active':'' }}"><a href="{{ url('about') }}">About</a> </li>
-        <li class="{{ app.request.get('_route') == 'home'?'active':'' }}"><a href="{{ url('home') }}">home</a> </li>
-        <li class="{{ app.request.get('_route') == 'newclient'?'active':'' }}"><a href="{{ url('newclient') }}">Nouveau client</a> </li>
-        <li class="{{ app.request.get('_route') == 'contact'?'active':'' }}"><a href="{{ url('contact') }}">Nouveau client</a> </li>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <ul class="navbar-nav">
+
+        <li class="{{ app.request.get('_route') starts with 'ab'?'active':'' }} nav-item"><a class="nav-link" href="{{ url('about') }}">About</a> </li>
+        <li class="{{ app.request.get('_route') == 'home'?'active':'' }} nav-item"><a class="nav-link" href="{{ url('home') }}">home</a> </li>
+        <li class="{{ app.request.get('_route') == 'newclient'?'active':'' }} nav-item"><a class="nav-link" href="{{ url('newclient') }}">Nouveau client</a> </li>
+        <li class="{{ app.request.get('_route') == 'contact'?'active':'' }} nav-item"><a  class="nav-link" href="{{ url('contact') }}">Nouveau client</a> </li>
     </ul>
 </nav>

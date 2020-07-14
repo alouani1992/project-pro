@@ -82,4 +82,15 @@ class ProductController extends AbstractController
         return $this->render('pages/contact.html.twig');
 
     }
+    /**
+     * @Route("/updateProduct", name="product_controller_product")
+     */
+    public function updateProduct(ProductRepository $productRepository){
+        $product_to_update = $productRepository->find(3);
+        //$img = imagecreatefromjpeg("/uploads/".$product_to_update->getImageOfProduct());
+        $product_to_update->setImageOfProduct(null);
+        $form = $this->createForm(ProductType::class,$product_to_update);
+        return $this->render("client/update.html.twig",array("controller_name"=>"Product Controller","form"=>$form->createView()));
+
+    }
 }

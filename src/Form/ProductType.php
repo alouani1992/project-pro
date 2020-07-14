@@ -15,12 +15,18 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('designation',null)
-            ->add('date_creation',null)
-            ->add('label',null)
-            ->add('description',null)
+            ->add('date_creation',null,
+                ['label' => 'Date de création']
+                )
+            ->add('label',null,
+                ['label' => 'Label']
+                )
+            ->add('description',null,
+            ['label' => 'Description']
+            )
 
             ->add('image_of_product', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'Image de produit',
 
                 // unmapped means that this field is not associated to any entity property
               //  'mapped' => false,
